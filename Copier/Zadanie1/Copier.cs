@@ -17,10 +17,25 @@ namespace Zadanie1
             }
             else return;
         }
-
         public void Scan(out IDocument document, IDocument.FormatType formatType)
         {
-            throw new NotImplementedException();
+            switch (formatType)
+            {
+                default:
+                    ScanCounter++;
+                    document = new ImageDocument($"ImageScan{ScanCounter}.jpg");
+                    break;
+                case IDocument.FormatType.TXT:
+                    ScanCounter++;
+                    document = new TextDocument($"TextScan{ScanCounter}.txt");
+                    break;
+                case IDocument.FormatType.PDF:
+                    ScanCounter++;
+                    document = new PDFDocument($"PDFScan{ScanCounter}.pdf");
+                    break;
+            }
+            if (state == IDevice.State.on) Console.WriteLine($"{DateTime.Now} {document.GetFileName()}");
+            else if (state == IDevice.State.off) Console.WriteLine("Urządzenie jest wyłączone");
         }
     }
 }
