@@ -22,7 +22,7 @@ namespace Zadanie1
             switch (formatType)
             {
                 default:
-                    ScanCounter++;
+                    ScanCounter++;z
                     document = new ImageDocument($"ImageScan{ScanCounter}.jpg");
                     break;
                 case IDocument.FormatType.TXT:
