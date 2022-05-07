@@ -59,9 +59,15 @@ namespace ver1
         void Scan(out IDocument document, IDocument.FormatType formatType);
     }
 
-    public interface IFax : IDevice
+    public interface IFax : IDevice, IPrinter, IScanner
     {
-
+        void ScanAndFax(string receiver);
+        void SendFax(in IDocument document, string receiver);
+        void RecieveFax(in IDocument document, string sender);
+                    // the telephonic transmission of scanned printed material
+                    // (both text and images),
+                    // normally to a telephone number connected
+                    // to a printer or other output device.
     }
 
 }

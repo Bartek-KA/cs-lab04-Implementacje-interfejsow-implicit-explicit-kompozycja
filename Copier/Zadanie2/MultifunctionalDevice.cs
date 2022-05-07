@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using ver1;
 
-namespace Zadanie1
+namespace Zadanie2
 {
-    public class Copier : BaseDevice, IPrinter, IScanner
+    public class MultifunctionalDevice : BaseDevice, IPrinter, IScanner, IFax
     {
-        public int PrintCounter { get; private set; } = 0;
-        public int ScanCounter { get; private set; } = 0;
+        public int PrintCounter { get; set; } = 0;
+        public int ScanCounter { get; set; } = 0;
+        public int FaxCounter   { get; set; } = 0;
 
         public void Print(in IDocument document)
         {
@@ -45,6 +50,35 @@ namespace Zadanie1
         {
             Scan(out IDocument document);
             Print(document);
+        }
+        public void ScanAndFax(string receiver)
+        {
+            if (state == IDevice.State.on)
+            {
+                Scan(out IDocument document, IDocument.FormatType.JPG);
+                SendFax(document, receiver);
+            }
+            else if (state == IDevice.State.off) Console.WriteLine("Urządzenie jest wyłączone");
+        }
+        public void SendFax(in IDocument document, string receiver)
+        {
+            if (state == IDevice.State.on)
+            {
+                Console.WriteLine($"Wysłano fax do {receiver}");
+                FaxCounter++;
+            }
+            else if (state == IDevice.State.off) Console.WriteLine("Urządzenie jest wyłączone");
+        }
+
+        public void RecieveFax(in IDocument document, string sender)
+        {
+            if (state == IDevice.State.on)
+            {
+                Console.WriteLine($"Nowa wiadomość {document.GetFileName()} od {sender}");
+                Print(document);
+                FaxCounter++;
+            }
+            else if (state == IDevice.State.off) Console.WriteLine("Urządzenie wyłączone");
         }
     }
 }

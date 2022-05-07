@@ -1,12 +1,12 @@
 ﻿using System;
 using ver1;
 
-namespace Zadanie1
+namespace Zadanie2
 {
     public class Copier : BaseDevice, IPrinter, IScanner
     {
-        public int PrintCounter { get; private set; } = 0;
-        public int ScanCounter { get; private set; } = 0;
+        public int PrintCounter { get; set; } = 0;
+        public int ScanCounter { get; set; } = 0;
 
         public void Print(in IDocument document)
         {
