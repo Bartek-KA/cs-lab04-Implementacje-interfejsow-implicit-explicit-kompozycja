@@ -1,22 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using ver1;
 
-namespace Zadanie2
+namespace Zadanie3
 {
-    public class Copier : BaseDevice, IPrinter, IScanner
+    public class Scanner : BaseDevice, IScanner
     {
-        public int PrintCounter { get; set; } = 0;
-        public int ScanCounter { get; set; } = 0;
-
-        public void Print(in IDocument document)
-        {
-            if (state == IDevice.State.on)
-            {
-                Console.WriteLine($"{DateTime.Now} Print: {document.GetFileName()}");
-                PrintCounter++;
-            }
-            else if (state == IDevice.State.off) Console.WriteLine("Urządzenie jest wyłączone");
-        }
+        int ScanCounter { get; set; } = 0;
         public void Scan(out IDocument document, IDocument.FormatType formatType)
         {
             switch (formatType)
@@ -36,15 +29,6 @@ namespace Zadanie2
             }
             if (state == IDevice.State.on) Console.WriteLine($"{DateTime.Now} {document.GetFileName()}");
             else if (state == IDevice.State.off) Console.WriteLine("Urządzenie jest wyłączone");
-        }
-        public void Scan(out IDocument document)
-        {
-            Scan(out document, IDocument.FormatType.JPG);
-        }
-        public void ScanAndPrint()
-        {
-            Scan(out IDocument document);
-            Print(document);
         }
     }
 }
