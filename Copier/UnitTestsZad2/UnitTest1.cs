@@ -1,10 +1,10 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ver1;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.IO;
 using Zadanie2;
 
-namespace ver1UnitTests
+namespace UnitTestsZad2
 {
-
     public class ConsoleRedirectionToStringWriter : IDisposable
     {
         private StringWriter stringWriter;
@@ -39,7 +39,7 @@ namespace ver1UnitTests
             var copier = new Copier();
             copier.PowerOff();
 
-            Assert.AreEqual(IDevice.State.off, copier.GetState()); 
+            Assert.AreEqual(IDevice.State.off, copier.GetState());
         }
 
         [TestMethod]
@@ -62,13 +62,13 @@ namespace ver1UnitTests
 
             var currentConsoleOut = Console.Out;
             currentConsoleOut.Flush();
-            using( var consoleOutput = new ConsoleRedirectionToStringWriter() )
+            using (var consoleOutput = new ConsoleRedirectionToStringWriter())
             {
                 IDocument doc1 = new PDFDocument("aaa.pdf");
                 copier.Print(in doc1);
                 Assert.IsTrue(consoleOutput.GetOutput().Contains("Print"));
             }
-            Assert.AreEqual(currentConsoleOut, Console.Out);   
+            Assert.AreEqual(currentConsoleOut, Console.Out);
         }
 
         // weryfikacja, czy po wywołaniu metody `Print` i wyłączonej kopiarce w napisie NIE pojawia się słowo `Print`
