@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ver1;
-using Xunit.Sdk;
-using Zadanie1;
+using Zadanie2;
 
 namespace ver1UnitTests
 {

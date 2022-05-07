@@ -9,8 +9,14 @@ namespace Zadanie3
 {
     public class Copier : BaseDevice
     {
-        int Counter { get; set; } = 0;
         int PrintCounter { get; set; } = 0;
-        int ScanCounter { get; set; } = 0;      
+        int ScanCounter { get; set; } = 0;
+        Printer printer;
+        Scanner scanner;
+        public Copier(Printer printer, Scanner scanner)
+        {
+            this.printer = printer;
+            this.scanner = scanner;
+        }    
     }
 }

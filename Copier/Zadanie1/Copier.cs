@@ -15,7 +15,7 @@ namespace Zadanie1
                 Console.WriteLine($"{DateTime.Now} Print: {document.GetFileName()}");
                 PrintCounter++;
             }
-            else return;
+            else if (state == IDevice.State.off) Console.WriteLine("Urządzenie jest wyłączone");
         }
         public void Scan(out IDocument document, IDocument.FormatType formatType)
         {
